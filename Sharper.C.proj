@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project
+    DefaultTargets='Build'
+    xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)'=='' ">Release</Configuration>
+    <OutputPath Condition=" '$(OutputPath)'=='' ">$(MSBuildProjectDirectory)\BuildArtifacts\bin\</OutputPath>
+    <SolutionDir Condition="'$(SolutionDir)'==''">.</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <BuildPackage>true</BuildPackage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\Core\Core.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\HigherKinds.Wrapper\HigherKinds.Wrapper.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\HigherKinds\HigherKinds.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\Lenses\Lenses.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\Tests\Tests.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\Tuples\Tuples.csproj'/>
+  </ItemGroup>
+
+  <Import Project='Sharper.C.targets'/>
+
+</Project>

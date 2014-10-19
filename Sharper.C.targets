@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Project
+    DefaultTargets='Build'
+    xmlns='http://schemas.microsoft.com/developer/msbuild/2003'>
+
+  <Target Name='Validate'>
+    <ItemGroup>
+      <_RequiredProperties Include='Configuration'>
+        <Value>$(Configuration)</Value>
+      </_RequiredProperties>
+      <_RequiredProperties Include='OutputPath'>
+        <Value>$(OutputPath)</Value>
+      </_RequiredProperties>
+      <_RequiredItems Include='Projects'>
+        <RequiredValue>%(Projects.Identity)</RequiredValue>
+        <RequiredFilePath>%(Projects.Identity)</RequiredFilePath>
+      </_RequiredItems>
+    </ItemGroup>
+
+    <Error
+        Condition="'%(_RequiredProperties.Value)'==''"
+        Text='Missing required property [%(_RequiredProperties.Identity)]'/>
+    <Error
+        Condition="'%(_RequiredItems.RequiredValue)'==''"
+        Text='Missing required item value [%(_RequiredItems.Identity)]'/>
+    <Error
+        Condition="'%(_RequiredItems.RequiredFilePath)'!='' and !Exists('%(_RequiredItems.RequiredFilePath)')"
+        Text='Unable to find expected path [%(_RequiredItems.RequiredFilePath)] on item [%(_RequiredItems.Identity)]'/>
+  </Target>
+
+  <PropertyGroup>
+    <BuildDependsOn>
+      Validate;
+      BeforeBuild;
+      CoreBuild;
+      AfterBuild;
+    </BuildDependsOn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CleanDependsOn>
+      Validate;
+      BeforeClean;
+      CoreClean;
+      AfterClean;
+    </CleanDependsOn>
+  </PropertyGroup>
+
+  <Target Name='Build' DependsOnTargets='$(BuildDependsOn)'/>
+  <Target Name='BeforeBuild'/>
+  <Target Name='AfterBuild'/>
+  <Target Name='CoreBuild'>
+    <PropertyGroup>
+      <_FullOutputPath>$(OutputPath)$(Configuration)\</_FullOutputPath>
+    </PropertyGroup>
+    <MakeDir Directories='$(_FullOutputPath)'/>
+    <MSBuild
+        Projects='@(Projects)'
+        BuildInParallel='true'
+        Properties="OutputPath=$(_FullOutputPath)"/>
+  </Target>
+
+  <Target Name='Clean' DependsOnTargets='$(CleanDependsOn)'/>
+  <Target Name='BeforeClean'/>
+  <Target Name='AfterClean'/>
+  <Target Name='CoreClean'>
+    <PropertyGroup>
+      <_FullOutputPath>$(OutputPath)$(Configuration)\</_FullOutputPath>
+    </PropertyGroup>
+    <MakeDir Directories='$(_FullOutputPath)'/>
+    <MSBuild
+        Projects='@(Projects)'
+        BuildInParallel='true'
+        Properties="OutputPath=$(_FullOutputPath)"
+        Targets="Clean"/>
+  </Target>
+
+  <Target Name='BuildPackages'>
+    <MSBuild
+        Projects='@(Projects)'
+        Targets='BuildPackage'/>
+  </Target>
+
+</Project>
