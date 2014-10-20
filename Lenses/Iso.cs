@@ -1,7 +1,6 @@
 using System;
 using Sharper.C;
 using Sharper.C.HigherKinds;
-using Sharper.C.HigherKinds.Wrapper;
 
 namespace Sharper.C.Lenses
 {

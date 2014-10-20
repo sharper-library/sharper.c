@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Sharper.C
 {
@@ -12,6 +12,11 @@ namespace Sharper.C
         public static Func<B, A> Const<A, B>(A a)
         {
             return b => a;
+        }
+
+        public static Func<B, A, C> Flip<A, B, C>(Func<A, B, C> f)
+        {
+            return (b, a) => f(a, b);
         }
 
         public static Func<A, C> Comp<A, B, C>(Func<B, C> f, Func<A, B> g)
@@ -28,5 +33,34 @@ namespace Sharper.C
         {
             return (a, b) => f(a)(b);
         }
+
+        public static Func<A, Bounce<B>>
+        Fix<A, B>(
+                Func<Func<A, Bounce<B>>, Func<A, Bounce<B>>> f,
+                uint max = DefaultRecurMaxFrames)
+        {
+            return Fix(f, max, max);
+        }
+
+        public static Func<A, Bounce<B>>
+        Fix<A, B>(
+                Func<Func<A, Bounce<B>>, Func<A, Bounce<B>>> f,
+                uint n,
+                uint max)
+        {
+            return x =>
+                f(n == 0
+                  ? a => Bounce.Next(() => Fix(f, max, max)(a))
+                  : Fix(f, n - 1, max))
+                (x);
+        }
+        public static Func<A, B> Recur<A, B>(
+                Func<Func<A, Bounce<B>>, Func<A, Bounce<B>>> f,
+                uint max = DefaultRecurMaxFrames)
+        {
+            return a => Fix<A, B>(f, max)(a).Run();
+        }
+
+        public const uint DefaultRecurMaxFrames = 1024;
     }
 }

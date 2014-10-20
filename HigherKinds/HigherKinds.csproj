@@ -42,20 +42,20 @@
     <Compile Include="Applicative.cs" />
     <Compile Include="Apply.cs" />
     <Compile Include="Const.cs" />
+    <Compile Include="Free.cs" />
+    <Compile Include="Func0.cs" />
     <Compile Include="Functor.cs" />
+    <Compile Include="HK.cs" />
     <Compile Include="Id.cs" />
     <Compile Include="Monad.cs" />
     <Compile Include="Profunctor.cs" />
     <Compile Include="Semimonad.cs" />
+    <Compile Include="Unsafe\HKUnsafe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Name>HigherKinds.Wrapper</Name>
-    </ProjectReference>
-    <ProjectReference
-      Include="..\HigherKinds.Wrapper\HigherKinds.Wrapper.csproj">
-      <Name>HigherKinds.Wrapper</Name>
+      <Name>Sharper.C.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

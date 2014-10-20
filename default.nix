@@ -1,4 +1,4 @@
-{ stdenv, mono }:
+{ stdenv, mono, fsharp }:
 
 stdenv.mkDerivation rec {
   name = "sharper-c-${version}";
@@ -6,7 +6,7 @@ stdenv.mkDerivation rec {
 
   src = ./.;
 
-  buildInputs = [mono];
+  buildInputs = [ mono fsharp ];
 
   meta = {
     description = "A library for C#";

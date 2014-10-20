@@ -1,6 +1,5 @@
-﻿using System;
-using Sharper.C.HigherKinds.Wrapper;
-using Sharper.C.HigherKinds.Wrapper.Unsafe;
+using System;
+using Sharper.C.HigherKinds.Unsafe;
 
 namespace Sharper.C.HigherKinds
 {

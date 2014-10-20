@@ -1,5 +1,4 @@
 using System;
-using Sharper.C.HigherKinds.Wrapper;
 
 namespace Sharper.C.HigherKinds
 {

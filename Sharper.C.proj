@@ -15,13 +15,21 @@
     <Projects
         Include='$(MSBuildProjectDirectory)\Core\Core.csproj'/>
     <Projects
-        Include='$(MSBuildProjectDirectory)\HigherKinds.Wrapper\HigherKinds.Wrapper.csproj'/>
+        Include='$(MSBuildProjectDirectory)\Core\Arbitraries\Arbitraries.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\Core\Laws\Laws.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\Core\Tests\Tests.csproj'/>
     <Projects
         Include='$(MSBuildProjectDirectory)\HigherKinds\HigherKinds.csproj'/>
     <Projects
-        Include='$(MSBuildProjectDirectory)\Lenses\Lenses.csproj'/>
+        Include='$(MSBuildProjectDirectory)\HigherKinds\Arbitraries\Arbitraries.csproj'/>
     <Projects
-        Include='$(MSBuildProjectDirectory)\Tests\Tests.csproj'/>
+        Include='$(MSBuildProjectDirectory)\HigherKinds\Laws\Laws.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\HigherKinds\Tests\Tests.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\Lenses\Lenses.csproj'/>
     <Projects
         Include='$(MSBuildProjectDirectory)\Tuples\Tuples.csproj'/>
   </ItemGroup>

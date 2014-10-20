@@ -1,4 +1,4 @@
-namespace Sharper.C.HigherKinds.Wrapper
+namespace Sharper.C.HigherKinds
 {
     public struct HK<T, A>
         where T : struct

@@ -68,6 +68,16 @@ namespace Sharper.C
                 ? new Either<L, R1>((L)f.value)
                 : Rmap((Func<R, R1>)f.value);
         }
+
+        public bool Eq<EqL, EqR>(Either<L, R> e)
+            where EqL : struct, IEqual<EqL, L>
+            where EqR : struct, IEqual<EqR, R>
+        {
+            return
+                (isLeft && e.isLeft && Equal<EqL, L>.Eq((L)value, (L)e.value))
+                ||
+                (!isLeft && !isLeft && Equal<EqR, R>.Eq((R)value, (R)e.value));
+        }
     }
 
     public static class Either
@@ -108,6 +118,17 @@ namespace Sharper.C
                 Func<R, R1, R2> f)
         {
             return e2.Rapply(e1.Rmap(Fn.Curry(f)));
+        }
+    }
+
+    public struct EitherEq<L, R, EqL, EqR>
+        : IEqual<EitherEq<L, R, EqL, EqR>, Either<L, R>>
+        where EqL : struct, IEqual<EqL, L>
+        where EqR : struct, IEqual<EqR, R>
+    {
+        public bool Eq(Either<L, R> e1, Either<L, R> e2)
+        {
+            return e1.Eq<EqL, EqR>(e2);
         }
     }
 }

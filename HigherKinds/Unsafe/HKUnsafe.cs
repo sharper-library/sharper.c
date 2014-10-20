@@ -1,4 +1,4 @@
-namespace Sharper.C.HigherKinds.Wrapper.Unsafe
+namespace Sharper.C.HigherKinds.Unsafe
 {
     public static class HKUnsafe<T>
         where T : struct

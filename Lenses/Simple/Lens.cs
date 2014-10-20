@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Sharper.C;
 
 namespace Sharper.C.Lenses.Simple

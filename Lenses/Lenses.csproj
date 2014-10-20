@@ -46,14 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Name>Core</Name>
+      <Name>Sharper.C.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\HigherKinds\HigherKinds.csproj">
-      <Name>HigherKinds</Name>
-    </ProjectReference>
-    <ProjectReference
-        Include="..\HigherKinds.Wrapper\HigherKinds.Wrapper.csproj">
-      <Name>HigherKinds.Wrapper</Name>
+      <Name>Sharper.C.HigherKinds</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
