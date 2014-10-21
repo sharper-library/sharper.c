@@ -73,10 +73,12 @@ namespace Sharper.C
             where EqL : struct, IEqual<EqL, L>
             where EqR : struct, IEqual<EqR, R>
         {
+            var el = default(Equal<EqL, L>);
+            var er = default(Equal<EqR, R>);
             return
-                (isLeft && e.isLeft && Equal<EqL, L>.Eq((L)value, (L)e.value))
+                (isLeft && e.isLeft && el.Eq((L)value, (L)e.value))
                 ||
-                (!isLeft && !isLeft && Equal<EqR, R>.Eq((R)value, (R)e.value));
+                (!isLeft && !isLeft && er.Eq((R)value, (R)e.value));
         }
     }
 

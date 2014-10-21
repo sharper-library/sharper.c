@@ -13,6 +13,7 @@
     <Compile Include="Either.cs" />
     <Compile Include="Equal.cs" />
     <Compile Include="Fn.cs" />
+    <Compile Include="Int.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Monoid.cs" />
     <Compile Include="Semigroup.cs" />

@@ -4,16 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <OutputType>Library</OutputType>
+    <OutputType Condition="'$(OutputType)' == ''">Library</OutputType>
+    <OutputType Condition="'$(Tests)' == 'yes'">Exe</OutputType>
+    <StartupObject Condition="'$(Tests)' == 'yes'">$(RootNamespace).Run</StartupObject>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <OutputPath>$(SolutionDir)\BuildArtifacts\bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -21,11 +23,29 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <ItemGroup Condition=" '$(Arbitraries)' == 'yes' or '$(Laws)' == 'yes' or '$(Tests)' == 'yes' ">
+    <Reference Include="Fuchu, Version=0.4.0">
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>
+    <Reference Include="Fuchu.FsCheck, Version=0.4.0">
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>
+    <Reference Include="FsCheck, Version=1.0.1">
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=4.3.1.0">
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>
+    <ProjectReference Include="..\..\FsCheck\FsCheck.csproj">
+      <Name>Sharper.C.FsCheck</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Tests)' == 'yes' or '$(Laws)' == 'yes' ">
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -38,11 +58,16 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <BRSearchPathFiles Include="$(SolutionDir)\packages\**\*.dll" />
   </ItemGroup>
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="BeforeResolveReferences">
+
+  <Target Name="BeforeBeforeResolveReferences"
+          BeforeTargets="BeforeBuild">
+    <Message Text="Files: @(BRSearchPathFiles)"/>
     <RemoveDuplicates Inputs="@(BRSearchPathFiles->'%(RootDir)%(Directory)')">
       <Output TaskParameter="Filtered" ItemName="BRSearchPath" />
     </RemoveDuplicates>
@@ -50,5 +75,16 @@
       <Output TaskParameter="Value"
               PropertyName="AssemblySearchPaths" />
     </CreateProperty>
+  </Target>
+
+  <Target
+      Name="Test"
+      DependsOnTargets="BeforeResolveReferences"
+      Condition="'$(Tests)' == 'yes'">
+    <Message Text="Testing $(AssemblyName)"/>
+    <Exec Command="$(OutputPath)\$(AssemblyName).exe"
+          Condition="'$(OS)' == 'Windows_NT'"/>
+    <Exec Command="mono '$(OutputPath)\$(AssemblyName).exe'"
+          Condition="'$(OS)' == 'Unix'"/>
   </Target>
 </Project>

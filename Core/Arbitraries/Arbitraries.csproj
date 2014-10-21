@@ -7,20 +7,15 @@
     <RootNamespace>Sharper.C.Arbitraries</RootNamespace>
     <AssemblyName>Sharper.C.Arbitraries</AssemblyName>
     <SolutionDir>..\..</SolutionDir>
+    <Arbitraries>yes</Arbitraries>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="EitherArbitrary.cs" />
+    <Compile Include="CoreArbitraries.cs" />
 
     <ProjectReference Include="..\Core.csproj">
       <Name>Sharper.C.Core</Name>
     </ProjectReference>
-
-    <Reference Include="FsCheck, Version=1.0.1">
-      <SpecificVersion>false</SpecificVersion>
-    </Reference>
-    <Reference Include="FSharp.Core, Version=4.3.1.0">
-      <SpecificVersion>false</SpecificVersion>
-    </Reference>
   </ItemGroup>
+
   <Import Project="..\..\Common.targets" />
 </Project>

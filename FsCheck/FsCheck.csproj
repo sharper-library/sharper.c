@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project
+    ToolsVersion="4.0"
+    DefaultTargets="Build"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <RootNamespace>Sharper.C.FsCheck</RootNamespace>
+    <AssemblyName>Sharper.C.FsCheck</AssemblyName>
+    <SolutionDir>..</SolutionDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Arbit.cs" />
+
+    <Reference Include="FsCheck, Version=1.0.1">
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=4.3.1.0">
+      <SpecificVersion>false</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+
+  <Import Project='..\Common.targets' />
+</Project>

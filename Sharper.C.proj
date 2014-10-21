@@ -5,8 +5,6 @@
 
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)'=='' ">Release</Configuration>
-    <OutputPath Condition=" '$(OutputPath)'=='' ">$(MSBuildProjectDirectory)\BuildArtifacts\bin\</OutputPath>
-    <SolutionDir Condition="'$(SolutionDir)'==''">.</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <BuildPackage>true</BuildPackage>
   </PropertyGroup>
@@ -14,6 +12,8 @@
   <ItemGroup>
     <Projects
         Include='$(MSBuildProjectDirectory)\Core\Core.csproj'/>
+    <Projects
+        Include='$(MSBuildProjectDirectory)\FsCheck\FsCheck.csproj'/>
     <Projects
         Include='$(MSBuildProjectDirectory)\Core\Arbitraries\Arbitraries.csproj'/>
     <Projects

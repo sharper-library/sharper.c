@@ -20,17 +20,22 @@ namespace Sharper.C
 
         public Maybe<B> Map<B>(Func<A, B> f)
         {
-            return isJust ? new Maybe<B>(f(value)) : new Maybe<B>();
+            return isJust ? new Maybe<B>(f(value)) : default(Maybe<B>);
         }
 
         public Maybe<B> Bind<B>(Func<A, Maybe<B>> f)
         {
-            return isJust ? f(value) : new Maybe<B>();
+            return isJust ? f(value) : default(Maybe<B>);
         }
 
         public Maybe<B> Apply<B>(Maybe<Func<A, B>> f)
         {
-            return f.isJust ? Map(f.value) : new Maybe<B>();
+            return f.isJust ? Map(f.value) : default(Maybe<B>);
+        }
+
+        public Maybe<A> Filter(Func<A, bool> p)
+        {
+            return isJust && p(value) ? this : default(Maybe<A>);
         }
     }
 
@@ -38,7 +43,7 @@ namespace Sharper.C
     {
         public static Maybe<A> Nothing<A>()
         {
-            return new Maybe<A>();
+            return default(Maybe<A>);
         }
 
         public static Maybe<A> Just<A>(A value)
@@ -70,6 +75,11 @@ namespace Sharper.C
                 Func<A, B, C> f)
         {
             return b.Apply(a.Map(Fn.Curry(f)));
+        }
+
+        public static Maybe<A> Where<A>(this Maybe<A> a, Func<A, bool> p)
+        {
+            return a.Filter(p);
         }
     }
 }

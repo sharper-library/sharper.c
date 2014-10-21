@@ -8,17 +8,26 @@ namespace Sharper.C
         bool Eq(A a1, A a2);
     }
 
-    public static class Equal<E, A>
+    public struct Equal<E, A>
         where E : struct, IEqual<E, A>
     {
-        public static Func<A, bool> Eq(A a1)
+        public Func<A, bool> Eq(A a1)
         {
             return a2 => default(E).Eq(a1, a2);
         }
 
-        public static bool Eq(A a1, A a2)
+        public bool Eq(A a1, A a2)
         {
             return default(E).Eq(a1, a2);
+        }
+    }
+
+    public static class EqualMethods
+    {
+        public static bool Eq<A, EqA>(this A a1, A a2)
+            where EqA : struct, IEqual<EqA, A>
+        {
+            return default(EqA).Eq(a1, a2);
         }
     }
 }

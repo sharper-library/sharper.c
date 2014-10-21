@@ -8,9 +8,6 @@
       <_RequiredProperties Include='Configuration'>
         <Value>$(Configuration)</Value>
       </_RequiredProperties>
-      <_RequiredProperties Include='OutputPath'>
-        <Value>$(OutputPath)</Value>
-      </_RequiredProperties>
       <_RequiredItems Include='Projects'>
         <RequiredValue>%(Projects.Identity)</RequiredValue>
         <RequiredFilePath>%(Projects.Identity)</RequiredFilePath>
@@ -46,33 +43,45 @@
     </CleanDependsOn>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <TestDependsOn>
+      Validate;
+      BeforeTest;
+      CoreTest;
+      AfterTest;
+    </TestDependsOn>
+  </PropertyGroup>
+
   <Target Name='Build' DependsOnTargets='$(BuildDependsOn)'/>
   <Target Name='BeforeBuild'/>
   <Target Name='AfterBuild'/>
   <Target Name='CoreBuild'>
-    <PropertyGroup>
-      <_FullOutputPath>$(OutputPath)$(Configuration)\</_FullOutputPath>
-    </PropertyGroup>
-    <MakeDir Directories='$(_FullOutputPath)'/>
+    <MakeDir Directories='$(OutputPath)'/>
     <MSBuild
         Projects='@(Projects)'
-        BuildInParallel='true'
-        Properties="OutputPath=$(_FullOutputPath)"/>
+        BuildInParallel='true'/>
   </Target>
 
   <Target Name='Clean' DependsOnTargets='$(CleanDependsOn)'/>
   <Target Name='BeforeClean'/>
   <Target Name='AfterClean'/>
   <Target Name='CoreClean'>
-    <PropertyGroup>
-      <_FullOutputPath>$(OutputPath)$(Configuration)\</_FullOutputPath>
-    </PropertyGroup>
-    <MakeDir Directories='$(_FullOutputPath)'/>
+    <MakeDir Directories='$(OutputPath)'/>
     <MSBuild
         Projects='@(Projects)'
         BuildInParallel='true'
-        Properties="OutputPath=$(_FullOutputPath)"
         Targets="Clean"/>
+  </Target>
+
+  <Target Name='Test' DependsOnTargets='$(TestDependsOn)'/>
+  <Target Name='BeforeTest'/>
+  <Target Name='AfterTest'/>
+  <Target Name='CoreTest'>
+    <MakeDir Directories='$(OutputPath)'/>
+    <MSBuild
+        Projects='@(Projects)'
+        BuildInParallel='true'
+        Targets="Test"/>
   </Target>
 
   <Target Name='BuildPackages'>

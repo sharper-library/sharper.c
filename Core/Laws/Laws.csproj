@@ -3,18 +3,24 @@
     ToolsVersion="4.0"
     DefaultTargets="Build"
     xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
   <PropertyGroup>
     <RootNamespace>Sharper.C.Laws</RootNamespace>
     <AssemblyName>Sharper.C.Laws</AssemblyName>
     <SolutionDir>..\..</SolutionDir>
+    <Laws>yes</Laws>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="EqualLaws.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Laws.cs" />
+    <Compile Include="MonoidLaws.cs" />
+    <Compile Include="SemigroupLaws.cs" />
+
     <ProjectReference Include="..\Core.csproj">
       <Name>Sharper.C.Core</Name>
     </ProjectReference>
   </ItemGroup>
+
   <Import Project='..\..\Common.targets' />
 </Project>
