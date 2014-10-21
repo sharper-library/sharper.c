@@ -10,7 +10,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <OutputPath>$(SolutionDir)\BuildArtifacts\bin\$(Configuration)\</OutputPath>
+    <OutputPathEnd>BuildArtifacts\bin\$(Configuration)\</OutputPathEnd>
+    <OutputPath>$(SolutionDir)\$(OutputPathEnd)</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,6 +46,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup Condition=" '$(Tests)' == 'yes' or '$(Laws)' == 'yes' ">
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -75,6 +78,18 @@
       <Output TaskParameter="Value"
               PropertyName="AssemblySearchPaths" />
     </CreateProperty>
+  </Target>
+
+  <UsingTask
+      TaskName="$(RootNamespace).Run"
+      AssemblyFile="$(OutputPathEnd)\$(AssemblyName).dll"
+      Condition="'$(Tests)' == 'yes'" />
+
+  <Target
+      Name="Test1"
+      DependsOnTargets="BeforeResolveReferences"
+      Condition="'$(Tests)' == 'yes'">
+    <Run/>
   </Target>
 
   <Target
