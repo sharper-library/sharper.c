@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project
+    ToolsVersion="4.0"
+    DefaultTargets="Build"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <RootNamespace>sharper.c</RootNamespace>
+    <AssemblyName>sharper.c.test</AssemblyName>
+    <SolutionDir>..</SolutionDir>
+    <StartupObject>sharper.c.test.Run</StartupObject>
+    <Tests>yes</Tests>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\core\core.csproj" />
+    <ProjectReference Include="..\either\either.csproj" />
+    <ProjectReference Include="..\enum\enum.csproj" />
+    <ProjectReference Include="..\function\function.csproj" />
+    <ProjectReference Include="..\laws\laws.csproj" />
+    <ProjectReference Include="..\lazy\lazy.csproj" />
+    <ProjectReference Include="..\legacy\legacy.csproj" />
+    <ProjectReference Include="..\list\list.csproj" />
+    <ProjectReference Include="..\maybe\maybe.csproj" />
+    <ProjectReference Include="..\resource\resource.csproj" />
+    <ProjectReference Include="..\semigroup\semigroup.csproj" />
+    <ProjectReference Include="..\these\these.csproj" />
+    <ProjectReference Include="..\trampoline\trampoline.csproj" />
+    <ProjectReference Include="..\tuple\tuple.csproj" />
+  </ItemGroup>
+
+  <Import Project='..\common.targets' />
+</Project>

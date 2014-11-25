@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project
+    ToolsVersion="4.0"
+    DefaultTargets="Build"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <RootNamespace>sharper.c.data.tuple</RootNamespace>
+    <AssemblyName>sharper.c.tuple</AssemblyName>
+    <SolutionDir>..</SolutionDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\core\core.csproj" />
+    <ProjectReference Include="..\semigroup\semigroup.csproj" />
+  </ItemGroup>
+
+  <Import Project='..\common.targets' />
+</Project>

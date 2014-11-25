@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project
+    ToolsVersion="4.0"
+    DefaultTargets="Build"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <RootNamespace>sharper.c.data.these</RootNamespace>
+    <AssemblyName>sharper.c.these</AssemblyName>
+    <SolutionDir>..</SolutionDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\core\core.csproj" />
+    <ProjectReference Include="..\either\either.csproj" />
+    <ProjectReference Include="..\function\function.csproj" />
+    <ProjectReference Include="..\lazy\lazy.csproj" />
+    <ProjectReference Include="..\maybe\maybe.csproj" />
+    <ProjectReference Include="..\semigroup\semigroup.csproj" />
+    <ProjectReference Include="..\tuple\tuple.csproj" />
+  </ItemGroup>
+
+  <Import Project='..\common.targets' />
+</Project>

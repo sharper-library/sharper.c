@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project
+    ToolsVersion="4.0"
+    DefaultTargets="Build"
+    xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <RootNamespace>sharper.c</RootNamespace>
+    <AssemblyName>sharper.c.laws</AssemblyName>
+    <SolutionDir>..</SolutionDir>
+    <Laws>yes</Laws>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\core\core.csproj" />
+    <ProjectReference Include="..\function\function.csproj" />
+    <ProjectReference Include="..\kinded\kinded.csproj" />
+    <ProjectReference Include="..\lazy\lazy.csproj" />
+    <ProjectReference Include="..\legacy\legacy.csproj" />
+    <ProjectReference Include="..\list\list.csproj" />
+    <ProjectReference Include="..\maybe\maybe.csproj" />
+    <ProjectReference Include="..\semigroup\semigroup.csproj" />
+    <ProjectReference Include="..\trampoline\trampoline.csproj" />
+    <ProjectReference Include="..\tuple\tuple.csproj" />
+  </ItemGroup>
+
+  <Import Project='..\common.targets' />
+</Project>
